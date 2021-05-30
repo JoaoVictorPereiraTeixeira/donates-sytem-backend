@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  hackaton-db:
+    build: ./.docker/mysql
+    container_name: hackaton-donations-system
+    restart: always
+    tty: true
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=hackaton
+      - MYSQL_DATABASE=hackatondonatessystem
+      - MYSQL_PASSWORD=hackaton
+      - MYSQL_USER=MainUser
