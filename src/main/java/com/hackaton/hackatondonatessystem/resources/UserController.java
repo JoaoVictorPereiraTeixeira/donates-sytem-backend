@@ -1,14 +1,12 @@
 package com.hackaton.hackatondonatessystem.resources;
 
-import com.hackaton.hackatondonatessystem.domain.User;
+import com.hackaton.hackatondonatessystem.domain.Member;
+import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,10 +16,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(method= RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll(){
-        List<User> users = userService.findAll();
+    @GetMapping
+    public ResponseEntity<List<MemberDTO>> findAll(){
+        List<MemberDTO> users = userService.findAll();
 
         return ResponseEntity.ok().body(users);
+    }
+
+    @PostMapping
+    public  ResponseEntity<MemberDTO> createMember(@RequestBody MemberDTO memberDTO){
+        Member member = new Member(memberDTO);
+        MemberDTO memberCreated = userService.create(member);
+        return ResponseEntity.ok().body(memberCreated);
     }
 }

@@ -2,30 +2,35 @@ package com.hackaton.hackatondonatessystem.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class User {
+public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
-    private String name;
+    private String title;
 
     @Column
-    private String email;
+    private String description;
 
     @Column
-    private String password;
+    private String donationDate;
 
+    @Column
+    private Long value;
+
+    @ManyToOne
+    private Sector sector;
+
+    @ManyToOne
+    private Cause cause;
 
 }
