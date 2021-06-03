@@ -29,4 +29,17 @@ public class UserController {
         MemberDTO memberCreated = userService.create(member);
         return ResponseEntity.ok().body(memberCreated);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MemberDTO> updateMember(@RequestBody MemberDTO memberDTO, @PathVariable("id") Long id){
+        Member member = new Member(memberDTO);
+        member.setId(id);
+        MemberDTO memberUpdated = userService.update(member);
+        return ResponseEntity.ok().body(memberUpdated);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> updateMember(@PathVariable("id") Long id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

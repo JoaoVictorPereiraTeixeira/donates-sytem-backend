@@ -23,12 +23,29 @@ public class UserService {
         return membersDTO;
     }
 
+   /* public MemberDTO find(Long id){
+        Optional<Member> member = repository.findById(id);
+        MemberDTO memberDTO = this.convertMembersDTO(member);
+        return memberDTO;
+
+    }*/
     public MemberDTO create(Member member){
         Member memberCreated = repository.save(member);
         MemberDTO memberDTO = new MemberDTO(memberCreated);
         return memberDTO;
     }
 
+    public MemberDTO update(Member member){
+        Member memberUpdated= repository.save(member);
+        MemberDTO memberDTO = this.convertMembersDTO(memberUpdated);
+        return memberDTO;
+    }
+    public boolean delete(Long id){
+        Member member = new Member();
+        member.setId(id);
+        repository.delete(member);
+        return true;
+    }
     private MemberDTO convertMembersDTO(Member member){
         return new MemberDTO(member);
     }
