@@ -1,7 +1,9 @@
 package com.hackaton.hackatondonatessystem.services;
 
+import com.hackaton.hackatondonatessystem.domain.Company;
 import com.hackaton.hackatondonatessystem.domain.DonationUser;
 import com.hackaton.hackatondonatessystem.domain.Member;
+import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
 import com.hackaton.hackatondonatessystem.dto.DonationUserDTO;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.repository.UserRepository;
@@ -23,12 +25,12 @@ public class UserService {
         return membersDTO;
     }
 
-   /* public MemberDTO find(Long id){
-        Optional<Member> member = repository.findById(id);
-        MemberDTO memberDTO = this.convertMembersDTO(member);
+    public MemberDTO findById(Long id) throws Exception {
+        Member member = repository.findById(id).orElseThrow(() -> new Exception("User not found"));
+        MemberDTO memberDTO = new MemberDTO(member);
         return memberDTO;
+    }
 
-    }*/
     public MemberDTO create(Member member){
         Member memberCreated = repository.save(member);
         MemberDTO memberDTO = new MemberDTO(memberCreated);

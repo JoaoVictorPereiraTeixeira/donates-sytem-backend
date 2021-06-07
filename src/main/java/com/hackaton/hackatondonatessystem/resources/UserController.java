@@ -1,6 +1,7 @@
 package com.hackaton.hackatondonatessystem.resources;
 
 import com.hackaton.hackatondonatessystem.domain.Member;
+import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class UserController {
         List<MemberDTO> users = userService.findAll();
 
         return ResponseEntity.ok().body(users);
+    }
+
+    @GetMapping("/{id}")
+    public  ResponseEntity<MemberDTO> findById(@PathVariable("id") Long id) throws Exception {
+        MemberDTO memberDTO = userService.findById(id);
+        return ResponseEntity.ok().body(memberDTO);
     }
 
     @PostMapping

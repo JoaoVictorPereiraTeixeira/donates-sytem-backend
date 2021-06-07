@@ -25,7 +25,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<CompanyDTO> find(@PathVariable("id") Long id) throws Exception {
+    public  ResponseEntity<CompanyDTO> findById(@PathVariable("id") Long id) throws Exception {
         CompanyDTO companyDTO = companyService.findById(id);
         return ResponseEntity.ok().body(companyDTO);
     }
