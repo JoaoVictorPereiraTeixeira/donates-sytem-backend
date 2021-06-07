@@ -19,15 +19,15 @@ public class CauseDTO {
 
     private Long valueDonated;
 
-    private Long goal;
+    private Double goal;
 
     private Long minimumDonationPf;
 
     private Long minimumDonationPj;
 
-    private Sector sector;
+    private SectorDTO sector;
 
-    private Member representative;
+    private MemberDTO representative;
 
     private List<DonationCompany> donationCompanies;
 
@@ -41,8 +41,8 @@ public class CauseDTO {
         this.goal = cause.getGoal();
         this.minimumDonationPf = cause.getMinimumDonationPf();
         this.minimumDonationPj = cause.getMinimumDonationPj();
-        this.sector = cause.getSector();
-        this.representative = cause.getRepresentative();
+        this.sector = new SectorDTO(cause.getSector());
+        this.representative = new MemberDTO(cause.getRepresentative());
         this.donationCompanies = cause.getDonationCompanies();
         this.donationUser = cause.getDonationUser();
     }

@@ -24,6 +24,22 @@ public class CauseService {
         return causeDTO;
     }
 
+    public CauseDTO create(Cause cause){
+        Cause causeCreated = repository.save(cause);
+        CauseDTO causeDTO = new CauseDTO(causeCreated);
+        return causeDTO;
+    }
+
+    public CauseDTO findById(Long id) throws Exception {
+        Cause cause = repository.findById(id).orElseThrow(() -> new Exception("Cause not found"));
+        CauseDTO causeDTO = new CauseDTO(cause);
+        return causeDTO;
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
     private CauseDTO convertCausesToDTO(Cause cause){
         return new CauseDTO(cause);
     }

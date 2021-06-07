@@ -29,10 +29,8 @@ public class MemberDTO {
     private List<DonationUser> donations = new ArrayList<>();
 
     public MemberDTO(Member member) {
-        this.id = member.getId();
         this.name = member.getName();
         this.email = member.getEmail();
-        this.cpf = member.getCpf();
         this.donations = member.getDonations();
     }
 }
