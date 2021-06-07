@@ -43,8 +43,8 @@ public class UserService {
 
     public void delete(Long id){
         repository.deleteById(id);
-
     }
+
     private MemberDTO convertMembersDTO(Member member){
         return new MemberDTO(member);
     }

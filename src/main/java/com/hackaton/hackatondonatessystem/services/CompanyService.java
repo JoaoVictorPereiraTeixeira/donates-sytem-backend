@@ -24,12 +24,31 @@ public class CompanyService {
         return companyDTO;
     }
 
+    public CompanyDTO findById(Long id) throws Exception {
+        Company company = repository.findById(id).orElseThrow(() -> new Exception("Company not found"));
+        CompanyDTO companyDTO = new CompanyDTO(company);
+        return companyDTO;
+    }
+
+
     public CompanyDTO create(Company company){
         Company companyCreated = repository.save(company);
         CompanyDTO companyDTO = new CompanyDTO(companyCreated);
         return companyDTO;
     }
-    
+
+    public CompanyDTO update(Company company){
+        Company companyUpdated = repository.save(company);
+        CompanyDTO companyDTO = convertCompaniesDTO(companyUpdated);
+        return companyDTO;
+    }
+
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+
     private CompanyDTO convertCompaniesDTO(Company company){
         return new CompanyDTO(company);
     }

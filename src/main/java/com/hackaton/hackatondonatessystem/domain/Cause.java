@@ -26,6 +26,12 @@ public class Cause {
     @Column
     private Long goal;
 
+    @Column
+    private Long minimumDonationPf;
+
+    @Column
+    private Long minimumDonationPj;
+
     @ManyToOne
     private Sector sector;
 
@@ -37,5 +43,6 @@ public class Cause {
 
     @OneToMany
     private List<DonationUser> donationUser;
+
 
 }
