@@ -29,4 +29,6 @@ public class Company extends User {
         this.donations = companyDTO.getDonations();
         this.sectors = companyDTO.getSectors();
     }
+
+
 }

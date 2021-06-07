@@ -40,11 +40,13 @@ public class UserService {
         MemberDTO memberDTO = this.convertMembersDTO(memberUpdated);
         return memberDTO;
     }
-    public boolean delete(Long id){
-        Member member = new Member();
-        member.setId(id);
-        repository.delete(member);
-        return true;
+
+    public void delete(Long id){
+//        Member member = new Member();
+//        member.setId(id);
+//        repository.delete(member);
+        repository.deleteById(id);
+//        return true;
     }
     private MemberDTO convertMembersDTO(Member member){
         return new MemberDTO(member);

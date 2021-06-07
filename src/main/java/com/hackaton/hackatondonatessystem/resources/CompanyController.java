@@ -1,11 +1,8 @@
 package com.hackaton.hackatondonatessystem.resources;
 
 import com.hackaton.hackatondonatessystem.domain.Company;
-import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
-import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.services.CompanyService;
-import com.hackaton.hackatondonatessystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
