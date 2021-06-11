@@ -15,4 +15,7 @@ public interface CompanyRepository extends JpaRepository<Company,Long> {
     List<Company> findCompaniesByCauses(Cause cause);
 
     List<Company> findCompaniesBySectors(Sector sector);
+
+    List<Company> findCompanyBySectorsIsNotNull();
+
 }

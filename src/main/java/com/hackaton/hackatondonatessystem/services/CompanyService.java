@@ -29,11 +29,21 @@ public class CompanyService {
         return companyDTO;
     }
 
+    public List<CompanyDTO> findOnlyDonorsCompanies(){
+        List<Company> companies = repository.findCompanyBySectorsIsNotNull();
+        List<CompanyDTO> companyDTO = companies.stream().map(this::convertCompaniesDTO).collect(Collectors.toList());
+        return companyDTO;
+    }
+
     public CompanyDTO findById(Long id) throws Exception {
         Company company = repository.findById(id).orElseThrow(() -> new Exception("Company not found"));
         CompanyDTO companyDTO = new CompanyDTO(company);
         return companyDTO;
     }
+
+
+
+
 
     public CompanyDTO create(Company company){
         Company companyCreated = repository.save(company);

@@ -19,10 +19,18 @@ public class CompanyController {
     CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<CompanyDTO>> findAll(){
-        List<CompanyDTO> companies = companyService.findAll();
+    public ResponseEntity<List<CompanyDTO>> findAll(@RequestParam(value = "only_donors", required = false) Boolean onlyDonors){
+        List<CompanyDTO> companies;
+
+        if(onlyDonors != null && onlyDonors){
+            companies = companyService.findOnlyDonorsCompanies();
+        } else {
+            companies = companyService.findAll();
+        }
+
         return ResponseEntity.ok().body(companies);
     }
+
 
     @GetMapping("/{id}")
     public  ResponseEntity<CompanyDTO> findById(@PathVariable("id") Long id) throws Exception {

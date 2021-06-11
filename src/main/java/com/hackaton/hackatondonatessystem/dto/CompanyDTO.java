@@ -28,19 +28,15 @@ public class CompanyDTO {
     private List<SectorDTO> sectors;
 
     public CompanyDTO(Company company) {
-        this.id = company.getId();
         this.name = company.getName();
         this.email = company.getEmail();
         this.cnpj = company.getCnpj();
-        this.donations = company.getDonations();
         if(sectors  != null){
             this.sectors = company.getSectors().stream().map(this::convertSectorsToDTO).collect(Collectors.toList());
         }
     }
-
     private SectorDTO convertSectorsToDTO(Sector sector){
         return new SectorDTO(sector);
     }
-
 
 }
