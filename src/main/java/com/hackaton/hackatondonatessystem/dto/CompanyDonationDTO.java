@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class DonationUserDTO {
+@NoArgsConstructor
+public class CompanyDonationDTO {
 
     private Long id;
 
-    private MemberDTO donor;
+    private CompanyDTO donor;
 
     private String title;
 
@@ -26,15 +26,16 @@ public class DonationUserDTO {
 
     private CauseDTO cause;
 
-    public DonationUserDTO(UserDonation donation) {
+    public CompanyDonationDTO(CompanyDonation donation) {
         this.id = donation.getId();
         this.title = donation.getTitle();
         this.description = donation.getDescription();
         this.donationDate = donation.getDonationDate();
         this.value = donation.getValue();
 
-        this.donor =  new MemberDTO(donation.getDonor());
+        this.donor =  new CompanyDTO(donation.getDonor());
         this.sector = new SectorDTO(donation.getSector());
         this.cause = new CauseDTO(donation.getCause());
     }
+
 }

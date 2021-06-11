@@ -9,18 +9,13 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-public class DonationUser extends Donation{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class UserDonation extends Donation{
 
     @ManyToOne
     private Member donor;
 
-    public DonationUser(DonationUserDTO donationUserDTO) {
-        this.id = donationUserDTO.getId();
-        this.donor = donationUserDTO.getDonor();
+    public UserDonation(DonationUserDTO donationUserDTO) {
+        this.donor = new Member(donationUserDTO.getDonor());
     }
 
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,9 +23,9 @@ public class CompanyDTO {
 
     private String cnpj;
 
-    private List<DonationCompany> donations;
+    private List<CompanyDonation> donations;
 
-    private List<Sector> sectors;
+    private List<SectorDTO> sectors;
 
     public CompanyDTO(Company company) {
         this.id = company.getId();
@@ -35,6 +33,14 @@ public class CompanyDTO {
         this.email = company.getEmail();
         this.cnpj = company.getCnpj();
         this.donations = company.getDonations();
-        this.sectors = company.getSectors();
+        if(sectors  != null){
+            this.sectors = company.getSectors().stream().map(this::convertSectorsToDTO).collect(Collectors.toList());
+        }
     }
+
+    private SectorDTO convertSectorsToDTO(Sector sector){
+        return new SectorDTO(sector);
+    }
+
+
 }

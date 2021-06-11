@@ -15,7 +15,7 @@ public class CauseDTO {
 
     private String title;
 
-    private String descrition;
+    private String description;
 
     private Long valueDonated;
 
@@ -29,21 +29,16 @@ public class CauseDTO {
 
     private MemberDTO representative;
 
-    private List<DonationCompany> donationCompanies;
-
-    private List<DonationUser> donationUser;
 
     public CauseDTO(Cause cause) {
         this.id = cause.getId();
         this.title = cause.getTitle();
-        this.descrition = cause.getDescrition();
+        this.description = cause.getDescription();
         this.valueDonated = cause.getValueDonated();
         this.goal = cause.getGoal();
         this.minimumDonationPf = cause.getMinimumDonationPf();
         this.minimumDonationPj = cause.getMinimumDonationPj();
         this.sector = new SectorDTO(cause.getSector());
         this.representative = new MemberDTO(cause.getRepresentative());
-        this.donationCompanies = cause.getDonationCompanies();
-        this.donationUser = cause.getDonationUser();
     }
 }

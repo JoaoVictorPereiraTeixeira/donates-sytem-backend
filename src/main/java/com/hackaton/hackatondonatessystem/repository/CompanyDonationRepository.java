@@ -2,17 +2,13 @@ package com.hackaton.hackatondonatessystem.repository;
 
 import com.hackaton.hackatondonatessystem.domain.Cause;
 import com.hackaton.hackatondonatessystem.domain.Company;
-import com.hackaton.hackatondonatessystem.domain.Member;
-import com.hackaton.hackatondonatessystem.domain.Sector;
+import com.hackaton.hackatondonatessystem.domain.CompanyDonation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company,Long> {
+public interface CompanyDonationRepository extends JpaRepository<CompanyDonation,Long> {
 
-    List<Company> findCompaniesByCauses(Cause cause);
-
-    List<Company> findCompaniesBySectors(Sector sector);
 }

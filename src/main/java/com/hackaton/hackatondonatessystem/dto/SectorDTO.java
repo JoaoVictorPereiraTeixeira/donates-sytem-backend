@@ -19,35 +19,15 @@ public class SectorDTO {
 
     private String name;
 
-    private String descrition;
+    private String description;
 
     private Long totalDonated;
-
-    private List<CompanyDTO> companies;
-
-    private List<CauseDTO> causes;
-
-    private List<DonationCompany> donationsCompany;
-
-    private List<DonationUser> donationsUser;
 
     public SectorDTO(Sector sector) {
         this.id = sector.getId();
         this.name = sector.getName();
-        this.descrition = sector.getDescrition();
+        this.description = sector.getDescription();
         this.totalDonated = sector.getTotalDonated();
-        this.companies = sector.getCompanies().stream().map(this::convertCompanyToDTO).collect(Collectors.toList());
-        this.causes = sector.getCauses().stream().map(this::convertCauseToDTO).collect(Collectors.toList());
-        this.donationsCompany = sector.getDonationsCompany();
-        this.donationsUser = sector.getDonationsUser();
-    }
-
-    public CompanyDTO convertCompanyToDTO (Company company) {
-        return new CompanyDTO(company);
-    }
-
-    public CauseDTO convertCauseToDTO(Cause cause) {
-        return new CauseDTO(cause);
     }
 
 }

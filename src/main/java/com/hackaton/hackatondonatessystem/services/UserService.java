@@ -1,10 +1,6 @@
 package com.hackaton.hackatondonatessystem.services;
 
-import com.hackaton.hackatondonatessystem.domain.Company;
-import com.hackaton.hackatondonatessystem.domain.DonationUser;
 import com.hackaton.hackatondonatessystem.domain.Member;
-import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
-import com.hackaton.hackatondonatessystem.dto.DonationUserDTO;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

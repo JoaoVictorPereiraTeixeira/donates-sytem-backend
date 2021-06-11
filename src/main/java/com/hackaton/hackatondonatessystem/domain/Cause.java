@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -20,7 +19,7 @@ public class Cause {
     private String title;
 
     @Column
-    private String descrition;
+    private String description;
 
     @Column
     private Long valueDonated;
@@ -41,24 +40,29 @@ public class Cause {
     private Member representative;
 
     @OneToMany
-    private List<DonationCompany> donationCompanies;
+    private List<CompanyDonation> donationCompanies;
 
     @OneToMany
-    private List<DonationUser> donationUser;
+    private List<UserDonation> userDonation;
 
 
     public Cause(CauseDTO cause) {
         this.id = cause.getId();
         this.title = cause.getTitle();
-        this.descrition = cause.getDescrition();
+        this.description = cause.getDescription();
         this.valueDonated = cause.getValueDonated();
         this.goal = cause.getGoal();
         this.minimumDonationPf = cause.getMinimumDonationPf();
         this.minimumDonationPj = cause.getMinimumDonationPj();
-        this.sector = new Sector(cause.getSector());
-        this.representative = new Member(cause.getRepresentative());
-        this.donationCompanies = cause.getDonationCompanies();
-        this.donationUser = cause.getDonationUser();
+
+        if(cause.getSector() != null){
+            this.sector = new Sector(cause.getSector());
+        }
+
+        if(cause.getRepresentative() != null){
+            this.representative = new Member(cause.getRepresentative());
+        }
+
     }
 
 }
