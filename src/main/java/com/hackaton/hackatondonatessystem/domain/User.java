@@ -1,16 +1,15 @@
 package com.hackaton.hackatondonatessystem.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Data
 public class User {
 
@@ -26,5 +25,13 @@ public class User {
 
     @Column
     private String password;
+
+    @Column
+    private Boolean confirmedEmail;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    private Permissao permissoes;
+
+
 
 }

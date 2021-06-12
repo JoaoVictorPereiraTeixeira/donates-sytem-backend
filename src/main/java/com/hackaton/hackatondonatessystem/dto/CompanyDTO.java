@@ -27,6 +27,10 @@ public class CompanyDTO {
 
     private List<SectorDTO> sectors;
 
+    private Permissao permissoes;
+
+    private Boolean confirmedEmail;
+
     public CompanyDTO(Company company) {
         this.name = company.getName();
         this.email = company.getEmail();

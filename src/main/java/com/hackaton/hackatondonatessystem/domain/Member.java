@@ -2,18 +2,22 @@ package com.hackaton.hackatondonatessystem.domain;
 
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 import javax.persistence.*;
 import java.util.List;
 
 
+
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@Data
 public class Member extends User {
 
     @Column
@@ -23,7 +27,7 @@ public class Member extends User {
     private List<UserDonation> donations;
 
     public Member(MemberDTO memberDTO) {
-        super(memberDTO.getId(),memberDTO.getName(),memberDTO.getEmail(),"");
+        super(memberDTO.getId(),memberDTO.getName(),memberDTO.getEmail(),memberDTO.getPassword(),false, memberDTO.getPermissoes());
     }
 
 }

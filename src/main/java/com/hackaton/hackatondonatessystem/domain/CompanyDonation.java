@@ -29,12 +29,4 @@ public class CompanyDonation extends Donation{
         this.donor = new Company(companyDonationDTO.getDonor());
     }
 
-    public CompanyDonation(Company donor) {
-        this.donor = donor;
-    }
-
-    public CompanyDonation(Long id, String title, String description, String donationDate, Long value, Sector sector, Cause cause, Company donor) {
-        super(id, title, description, donationDate, value, sector, cause);
-        this.donor = donor;
-    }
 }
