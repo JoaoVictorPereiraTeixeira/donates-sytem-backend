@@ -1,5 +1,6 @@
 package com.hackaton.hackatondonatessystem.security;
 
+import com.hackaton.hackatondonatessystem.services.OAuthService;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,11 +17,11 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private JwtService jwtService;
-    private UserService userService;
+    private OAuthService oauthService;
 
-    public JwtAuthFilter(JwtService jwtService, UserService userService) {
+    public JwtAuthFilter(JwtService jwtService, OAuthService oauthService) {
         this.jwtService = jwtService;
-        this.userService = userService;
+        this.oauthService = oauthService;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             boolean isValid = jwtService.tokenValido(token);
             if(isValid){
                 String loginUsuario = jwtService.obterLoginUsuario(token);
-                UserDetails usuario =  userService.loadUserByUsername(loginUsuario);
+                UserDetails usuario =  oauthService.loadUserByUsername(loginUsuario);
                 UsernamePasswordAuthenticationToken user =
                         new UsernamePasswordAuthenticationToken(usuario,
                                 null,

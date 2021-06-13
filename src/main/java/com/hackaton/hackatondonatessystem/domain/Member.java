@@ -23,11 +23,17 @@ public class Member extends User {
     @Column
     private String cpf;
 
+    @Column
+    private boolean legalEntity;
+
     @OneToMany
     private List<UserDonation> donations;
 
+
     public Member(MemberDTO memberDTO) {
         super(memberDTO.getId(),memberDTO.getName(),memberDTO.getEmail(),memberDTO.getPassword(),false, memberDTO.getPermissoes());
+        this.cpf = memberDTO.getCpf();
+        this.legalEntity = true;
     }
 
 }

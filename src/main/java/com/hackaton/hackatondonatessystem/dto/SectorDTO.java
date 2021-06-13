@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +18,10 @@ public class SectorDTO {
 
     private Long id;
 
+    @NotEmpty(message="Field name is required")
     private String name;
 
+    @NotEmpty(message="Field description is required")
     private String description;
 
     private Long totalDonated;

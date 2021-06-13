@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +16,16 @@ public class CompanyDTO {
 
     private Long id;
 
+    @NotEmpty(message="Field name is required")
     private String name;
 
+    @NotEmpty(message="Field email is required")
     private String email;
 
+    @NotEmpty(message="Field password is required")
     private String password;
 
+    @NotEmpty(message="Field cnpj is required")
     private String cnpj;
 
     private List<CompanyDonation> donations;

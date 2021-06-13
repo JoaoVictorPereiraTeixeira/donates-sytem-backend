@@ -3,6 +3,7 @@ package com.hackaton.hackatondonatessystem.config;
 
 import com.hackaton.hackatondonatessystem.security.JwtAuthFilter;
 import com.hackaton.hackatondonatessystem.security.JwtService;
+import com.hackaton.hackatondonatessystem.services.OAuthService;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService usuarioService;
+    private OAuthService oauthService;
 
     @Autowired
     private JwtService jwtService;
@@ -45,13 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public OncePerRequestFilter jwtFilter(){
-        return new JwtAuthFilter(jwtService, usuarioService);
+        return new JwtAuthFilter(jwtService, oauthService);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(usuarioService)
+            .userDetailsService(oauthService)
             .passwordEncoder(passwordEncoder());
     }
 

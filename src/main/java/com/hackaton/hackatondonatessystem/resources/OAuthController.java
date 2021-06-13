@@ -6,6 +6,7 @@ import com.hackaton.hackatondonatessystem.dto.CredenciaisDTO;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.dto.TokenDTO;
 import com.hackaton.hackatondonatessystem.security.JwtService;
+import com.hackaton.hackatondonatessystem.services.OAuthService;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/oauth")
 public class OAuthController {
+
+    @Autowired
+    OAuthService oauthService;
 
     @Autowired
     UserService userService;
@@ -34,7 +38,7 @@ public class OAuthController {
                     .password(credenciais.getSenha()).build();
 
             if(loginConfirmed(credenciais)){
-                UserDetails usuarioAutenticado = userService.autenticar(user);
+                UserDetails usuarioAutenticado = oauthService.autenticar(user);
                 String token = jwtService.gerarToken(user);
                 return new TokenDTO(user.getEmail(),token);
             } else {

@@ -1,13 +1,16 @@
 package com.hackaton.hackatondonatessystem.resources;
 
+import com.hackaton.hackatondonatessystem.domain.ApiErrors;
 import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.services.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +21,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<MemberDTO>> findAll(){
+    public ResponseEntity<List<MemberDTO>> findAll() throws NotFoundException {
         List<MemberDTO> users = userService.findAll();
         return ResponseEntity.ok().body(users);
     }
