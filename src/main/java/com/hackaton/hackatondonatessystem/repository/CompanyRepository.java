@@ -14,6 +14,10 @@ public interface CompanyRepository extends JpaRepository<Company,Long> {
 
     List<Company> findCompaniesByCauses(Cause cause);
 
+    Company findCompanyByEmail(String email);
+
+    Company findCompanyByCnpj(String cnpj);
+
     List<Company> findCompaniesBySectors(Sector sector);
 
     List<Company> findCompanyBySectorsIsNotNull();

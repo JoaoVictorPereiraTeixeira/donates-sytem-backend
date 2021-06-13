@@ -33,14 +33,14 @@ public class UserController {
     }
 
     @PostMapping
-    public  ResponseEntity<MemberDTO> createMember(@RequestBody MemberDTO memberDTO) throws NotFoundException {
+    public  ResponseEntity<MemberDTO> createMember(@RequestBody @Valid MemberDTO memberDTO) throws NotFoundException {
         Member member = new Member(memberDTO);
         MemberDTO memberCreated = userService.create(member);
         return ResponseEntity.ok().body(memberCreated);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MemberDTO> updateMember(@RequestBody MemberDTO memberDTO, @PathVariable("id") Long id){
+    public ResponseEntity<MemberDTO> updateMember(@RequestBody @Valid MemberDTO memberDTO, @PathVariable("id") Long id){
         Member member = new Member(memberDTO);
         member.setId(id);
         MemberDTO memberUpdated = userService.update(member);

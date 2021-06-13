@@ -3,9 +3,11 @@ package com.hackaton.hackatondonatessystem.services;
 import com.hackaton.hackatondonatessystem.domain.ApiErrors;
 import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.domain.Permissao;
+import com.hackaton.hackatondonatessystem.domain.User;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.repository.PermissionRepository;
 import com.hackaton.hackatondonatessystem.repository.MemberRepository;
+import com.hackaton.hackatondonatessystem.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +24,9 @@ public class UserService{
 
     @Autowired
     MemberRepository repository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     PermissionRepository permissionRepository;
@@ -46,7 +51,12 @@ public class UserService{
 
     public MemberDTO findByLogin(String login) throws NotFoundException {
         Member member = repository.findByEmail(login);
-        ApiErrors.verifyIsEmpty(member,"There are no registered member");
+
+        if(member == null){
+            member = repository.findByCpf(login);
+        }
+
+        ApiErrors.verifyIsEmpty(member,"There are no registered member with this cpf or email");
 
         MemberDTO memberDTO = new MemberDTO(member);
         return memberDTO;

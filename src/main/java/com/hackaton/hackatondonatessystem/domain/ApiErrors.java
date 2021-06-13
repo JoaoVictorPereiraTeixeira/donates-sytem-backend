@@ -26,7 +26,7 @@ public class ApiErrors {
     }
 
     public static void verifyIsEmpty(Object t, String message) throws NotFoundException {
-        if(t.equals("") || t == null){
+        if(t == null || t.equals("")){
             throw new NotFoundException(message);
         }
     }

@@ -2,14 +2,12 @@ package com.hackaton.hackatondonatessystem.dto;
 
 import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.domain.Permissao;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {

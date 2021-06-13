@@ -9,10 +9,12 @@ import com.hackaton.hackatondonatessystem.dto.SectorDTO;
 import com.hackaton.hackatondonatessystem.services.CauseService;
 import com.hackaton.hackatondonatessystem.services.CompanyService;
 import com.hackaton.hackatondonatessystem.services.SectorService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,13 +31,13 @@ public class SectorController {
     CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<SectorDTO>> findAll(){
+    public ResponseEntity<List<SectorDTO>> findAll() throws NotFoundException {
         List<SectorDTO> sectors = sectorService.findAll();
         return ResponseEntity.ok().body(sectors);
     }
 
     @PostMapping
-    public  ResponseEntity<SectorDTO> createSector(@RequestBody SectorDTO sectorDTO){
+    public  ResponseEntity<SectorDTO> createSector(@RequestBody @Valid SectorDTO sectorDTO){
         Sector sector = new Sector(sectorDTO);
         SectorDTO sectorCreated = sectorService.create(sector);
         return ResponseEntity.ok().body(sectorCreated);
@@ -48,7 +50,7 @@ public class SectorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SectorDTO> updateSector(@RequestBody SectorDTO sectorDTO, @PathVariable("id") Long id){
+    public ResponseEntity<SectorDTO> updateSector(@RequestBody @Valid SectorDTO sectorDTO, @PathVariable("id") Long id){
         Sector sector = new Sector(sectorDTO);
         sector.setId(id);
         SectorDTO sectorUpdated = sectorService.update(sector);

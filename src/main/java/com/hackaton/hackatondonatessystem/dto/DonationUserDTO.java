@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,18 +14,25 @@ public class DonationUserDTO {
 
     private Long id;
 
+    @NotEmpty(message="Field donor is required")
     private MemberDTO donor;
 
+    @NotEmpty(message="Field title is required")
     private String title;
 
+    @NotEmpty(message="Field description is required")
     private String description;
 
+    @NotEmpty(message="Field donationDate is required")
     private String donationDate;
 
+    @NotEmpty(message="Field value is required")
     private Long value;
 
+    @NotEmpty(message="Field sector is required")
     private SectorDTO sector;
 
+    @NotEmpty(message="Field cause is required")
     private CauseDTO cause;
 
     public DonationUserDTO(UserDonation donation) {

@@ -5,10 +5,12 @@ import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
 import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.services.CompanyService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class CompanyController {
     CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<CompanyDTO>> findAll(@RequestParam(value = "only_donors", required = false) Boolean onlyDonors){
+    public ResponseEntity<List<CompanyDTO>> findAll(@RequestParam(value = "only_donors", required = false) Boolean onlyDonors) throws NotFoundException {
         List<CompanyDTO> companies;
 
         if(onlyDonors != null && onlyDonors){
@@ -39,14 +41,14 @@ public class CompanyController {
     }
 
     @PostMapping
-    public  ResponseEntity<CompanyDTO> createCompany(@RequestBody CompanyDTO companyDTO){
+    public  ResponseEntity<CompanyDTO> createCompany(@RequestBody @Valid CompanyDTO companyDTO) throws NotFoundException {
         Company company = new Company(companyDTO);
         CompanyDTO companyCreated = companyService.create(company);
         return ResponseEntity.ok().body(companyCreated);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CompanyDTO> updateCompany(@RequestBody CompanyDTO companyDTO, @PathVariable("id") Long id){
+    public ResponseEntity<CompanyDTO> updateCompany(@RequestBody @Valid CompanyDTO companyDTO, @PathVariable("id") Long id){
         Company company = new Company(companyDTO);
         company.setId(id);
         CompanyDTO companyUpdated = companyService.update(company);

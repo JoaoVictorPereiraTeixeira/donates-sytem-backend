@@ -3,8 +3,10 @@ package com.hackaton.hackatondonatessystem.domain;
 import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
 import com.hackaton.hackatondonatessystem.dto.SectorDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
+@SuperBuilder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

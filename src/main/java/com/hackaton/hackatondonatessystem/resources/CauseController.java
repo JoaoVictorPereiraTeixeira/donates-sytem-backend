@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -58,7 +60,7 @@ public class CauseController {
     }
 
     @PostMapping("/{id}/company-donations")
-    public  ResponseEntity<Void> createCompanyDonation(@PathVariable("id") Long id, @RequestBody CompanyDonationDTO companyDonationDTO) throws Exception {
+    public  ResponseEntity<Void> createCompanyDonation(@PathVariable("id") Long id, @RequestBody @Valid CompanyDonationDTO companyDonationDTO) throws Exception {
         CauseDTO causeDTO = new CauseDTO();
         causeDTO.setId(id);
         companyDonationDTO.setCause(causeDTO);
@@ -69,14 +71,14 @@ public class CauseController {
     }
 
     @PostMapping
-    public  ResponseEntity<CauseDTO> createCause(@RequestBody CauseDTO causeDTO){
+    public  ResponseEntity<CauseDTO> createCause(@RequestBody @Valid CauseDTO causeDTO){
         Cause cause = new Cause(causeDTO);
         CauseDTO causeCreated = causeService.create(cause);
         return ResponseEntity.ok().body(causeCreated);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CauseDTO> updateCause(@RequestBody CauseDTO causeDTO, @PathVariable("id") Long id){
+    public ResponseEntity<CauseDTO> updateCause(@RequestBody @Valid CauseDTO causeDTO, @PathVariable("id") Long id){
         Cause cause = new Cause(causeDTO);
         cause.setId(id);
         CauseDTO causeCreated = causeService.update(cause);

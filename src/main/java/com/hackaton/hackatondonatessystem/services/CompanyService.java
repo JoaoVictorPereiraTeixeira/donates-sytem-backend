@@ -1,13 +1,14 @@
 package com.hackaton.hackatondonatessystem.services;
 
-import com.hackaton.hackatondonatessystem.domain.ApiErrors;
-import com.hackaton.hackatondonatessystem.domain.Company;
-import com.hackaton.hackatondonatessystem.domain.Sector;
+import com.hackaton.hackatondonatessystem.domain.*;
 import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
+import com.hackaton.hackatondonatessystem.dto.MemberDTO;
 import com.hackaton.hackatondonatessystem.repository.CompanyRepository;
+import com.hackaton.hackatondonatessystem.repository.PermissionRepository;
 import com.hackaton.hackatondonatessystem.repository.SectorRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public class CompanyService {
 
     @Autowired
     SectorRepository sectorRepository;
+
+    @Autowired
+    PermissionRepository permissionRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     public List<CompanyDTO> findAll(){
         List<Company> companies = repository.findAll();
@@ -43,7 +50,14 @@ public class CompanyService {
         return companyDTO;
     }
 
-    public CompanyDTO create(Company company){
+    public CompanyDTO create(Company company) throws NotFoundException {
+        String senhaCriptografada = encoder.encode(company.getPassword());
+        company.setPassword(senhaCriptografada);
+
+        Long id = Long.valueOf(1);
+        Permissao permissao =  permissionRepository.findById(id).orElseThrow(() -> new NotFoundException("Permission not found"));
+        company.setPermissoes(permissao);
+
         Company companyCreated = repository.save(company);
         CompanyDTO companyDTO = new CompanyDTO(companyCreated);
         return companyDTO;
@@ -65,6 +79,18 @@ public class CompanyService {
         return companiesDTO;
     }
 
+    public CompanyDTO findByLogin(String login) throws NotFoundException {
+        Company company = repository.findCompanyByEmail(login);
+        if(company == null){
+            company = repository.findCompanyByCnpj(login);
+        }
+
+        ApiErrors.verifyIsEmpty(company,"There are no registered company with this cnpj or email");
+
+        CompanyDTO companyDTO = new CompanyDTO(company);
+        return companyDTO;
+    }
+
     public void delete(Long id){
         repository.deleteById(id);
     }
@@ -72,5 +98,10 @@ public class CompanyService {
 
     private CompanyDTO convertCompaniesDTO(Company company){
         return new CompanyDTO(company);
+    }
+
+    public String getPassword(CompanyDTO companyDTO) {
+        Company company = repository.findCompanyByEmail(companyDTO.getEmail());
+        return company.getPassword();
     }
 }

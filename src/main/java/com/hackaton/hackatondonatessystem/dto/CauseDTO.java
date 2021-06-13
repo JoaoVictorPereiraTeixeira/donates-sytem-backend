@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -13,20 +14,28 @@ public class CauseDTO {
 
     private Long id;
 
+    @NotEmpty(message="Field title is required")
     private String title;
 
+    @NotEmpty(message="Field description is required")
     private String description;
 
+    @NotEmpty(message="Field valueDonated is required")
     private Long valueDonated;
 
+    @NotEmpty(message="Field goal is required")
     private Double goal;
 
+    @NotEmpty(message="Field minimumDonationPf is required")
     private Long minimumDonationPf;
 
+    @NotEmpty(message="Field minimumDonationPj is required")
     private Long minimumDonationPj;
 
+    @NotEmpty(message="Field sector is required")
     private SectorDTO sector;
 
+    @NotEmpty(message="Field representative is required")
     private MemberDTO representative;
 
 

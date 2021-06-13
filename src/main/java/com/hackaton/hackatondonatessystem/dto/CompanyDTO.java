@@ -40,6 +40,7 @@ public class CompanyDTO {
         this.name = company.getName();
         this.email = company.getEmail();
         this.cnpj = company.getCnpj();
+        this.confirmedEmail = company.getConfirmedEmail();
         if(sectors  != null){
             this.sectors = company.getSectors().stream().map(this::convertSectorsToDTO).collect(Collectors.toList());
         }
