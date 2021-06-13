@@ -9,6 +9,7 @@ import com.hackaton.hackatondonatessystem.dto.CompanyDTO;
 import com.hackaton.hackatondonatessystem.dto.CompanyDonationDTO;
 import com.hackaton.hackatondonatessystem.services.CauseService;
 import com.hackaton.hackatondonatessystem.services.CompanyService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -86,7 +87,7 @@ public class CauseController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id) throws NotFoundException {
         causeService.delete(id);
         return ResponseEntity.noContent().build();
     }

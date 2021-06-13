@@ -56,7 +56,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id) throws NotFoundException {
         companyService.delete(id);
         return ResponseEntity.noContent().build();
     }

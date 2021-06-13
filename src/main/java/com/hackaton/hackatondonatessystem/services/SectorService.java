@@ -43,8 +43,12 @@ public class SectorService {
         return sectorDTO;
     }
 
-    public void delete(Long id){
-        repository.deleteById(id);
+    public void delete(Long id) throws NotFoundException {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        } else{
+            throw new NotFoundException("Cause not found");
+        }
     }
 
     private SectorDTO convertSectorsToDTO(Sector sector){

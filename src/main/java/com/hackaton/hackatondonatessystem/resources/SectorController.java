@@ -58,7 +58,7 @@ public class SectorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSector(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteSector(@PathVariable("id") Long id) throws NotFoundException {
         sectorService.delete(id);
         return ResponseEntity.noContent().build();
     }
