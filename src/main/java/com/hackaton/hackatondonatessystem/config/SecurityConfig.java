@@ -32,13 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtService jwtService;
 
-
-
-    //
-//    public SecurityConfig(JwtService jwtServices) {
-//        this.jwtService = jwtService;
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -61,7 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+
                 //eventos
+
                 .antMatchers(HttpMethod.POST, "/users")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/oauth")

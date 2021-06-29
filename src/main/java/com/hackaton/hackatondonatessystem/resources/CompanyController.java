@@ -21,10 +21,10 @@ public class CompanyController {
     CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<CompanyDTO>> findAll(@RequestParam(value = "only_donors", required = false) Boolean onlyDonors) throws NotFoundException {
+    public ResponseEntity<List<CompanyDTO>> findAll(@RequestParam(value = "filter", required = false) String filter) throws NotFoundException {
         List<CompanyDTO> companies;
 
-        if(onlyDonors != null && onlyDonors){
+        if(filter != null && filter.matches("only_donors")) {
             companies = companyService.findOnlyDonorsCompanies();
         } else {
             companies = companyService.findAll();

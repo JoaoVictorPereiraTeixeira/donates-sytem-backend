@@ -31,9 +31,11 @@ public class CauseController {
     CauseService sectorService;
 
     @GetMapping
-    public ResponseEntity<List<CauseDTO>> findAll(@RequestParam(value = "sectorId", required = false) String sectorId) throws Exception {
-        Cause causeFilter = new Cause();
+    public ResponseEntity<List<CauseDTO>> findAll(
+            @RequestParam(value = "sectorId", required = false) String sectorId,
+            @RequestParam(value = "title", required = false) String title) throws Exception {
 
+        Cause causeFilter = new Cause();
         Sector sector = new Sector();
 
         if(sectorId != null){
@@ -42,6 +44,7 @@ public class CauseController {
         }
 
         causeFilter.setSector(sector);
+        causeFilter.setTitle(title);
 
         List<CauseDTO> causes = causeService.findAll(causeFilter);
         return ResponseEntity.ok().body(causes);
