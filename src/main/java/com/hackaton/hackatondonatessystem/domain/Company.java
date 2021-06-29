@@ -33,7 +33,7 @@ public class Company extends User {
     private Set<Cause> causes;
 
     public Company(CompanyDTO companyDTO) {
-        super(companyDTO.getId(),companyDTO.getName(),companyDTO.getEmail(),companyDTO.getPassword(),companyDTO.getConfirmedEmail(),companyDTO.getPermissoes());
+        super(companyDTO.getId(),companyDTO.getName(),companyDTO.getEmail(),companyDTO.getPassword(),companyDTO.getConfirmedEmail(), companyDTO.getDepositions(), companyDTO.getPermissoes());
 
         this.cnpj = companyDTO.getCnpj();
         this.donations = companyDTO.getDonations();

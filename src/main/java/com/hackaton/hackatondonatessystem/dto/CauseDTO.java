@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +20,9 @@ public class CauseDTO {
 
     @NotEmpty(message="Field description is required")
     private String description;
+
+    @NotEmpty(message="Field subTitle is required")
+    private String subTitle;
 
     @NotEmpty(message="Field valueDonated is required")
     private Long valueDonated;
@@ -38,6 +42,8 @@ public class CauseDTO {
     @NotEmpty(message="Field representative is required")
     private MemberDTO representative;
 
+    private List<ImageDTO> imagesDTO;
+
 
     public CauseDTO(Cause cause) {
         this.id = cause.getId();
@@ -49,5 +55,15 @@ public class CauseDTO {
         this.minimumDonationPj = cause.getMinimumDonationPj();
         this.sector = new SectorDTO(cause.getSector());
         this.representative = new MemberDTO(cause.getRepresentative());
+
+        if(cause.getImages() != null){
+            this.imagesDTO  = cause.getImages().stream().map(this::convertImageToDTO).collect(Collectors.toList());
+        }
+    }
+
+
+
+    private ImageDTO convertImageToDTO(Image image){
+        return new ImageDTO(image);
     }
 }

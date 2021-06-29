@@ -33,7 +33,6 @@ public class CompanyController {
         return ResponseEntity.ok().body(companies);
     }
 
-
     @GetMapping("/{id}")
     public  ResponseEntity<CompanyDTO> findById(@PathVariable("id") Long id) throws Exception {
         CompanyDTO companyDTO = companyService.findById(id);

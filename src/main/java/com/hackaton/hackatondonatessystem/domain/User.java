@@ -1,10 +1,12 @@
 package com.hackaton.hackatondonatessystem.domain;
 
+import com.hackaton.hackatondonatessystem.dto.UserDTO;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 
 @Entity
@@ -30,9 +32,13 @@ public class User {
     @Column
     private Boolean confirmedEmail;
 
+    @OneToMany
+    private List<Deposition> depositions;
+
     @OneToOne(cascade=CascadeType.ALL)
     private Permissao permissoes;
 
-
-
+    public User(UserDTO author) {
+        this.id = author.getId();
+    }
 }

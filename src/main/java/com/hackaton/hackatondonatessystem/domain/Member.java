@@ -31,7 +31,7 @@ public class Member extends User {
 
 
     public Member(MemberDTO memberDTO) {
-        super(memberDTO.getId(),memberDTO.getName(),memberDTO.getEmail(),memberDTO.getPassword(),false, memberDTO.getPermissoes());
+        super(memberDTO.getId(),memberDTO.getName(),memberDTO.getEmail(),memberDTO.getPassword(),false, memberDTO.getDepositions(),memberDTO.getPermissoes());
         this.cpf = memberDTO.getCpf();
         this.legalEntity = true;
     }

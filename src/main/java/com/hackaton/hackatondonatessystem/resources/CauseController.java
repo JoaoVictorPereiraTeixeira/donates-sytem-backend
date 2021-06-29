@@ -47,6 +47,7 @@ public class CauseController {
         causeFilter.setTitle(title);
 
         List<CauseDTO> causes = causeService.findAll(causeFilter);
+
         return ResponseEntity.ok().body(causes);
     }
 

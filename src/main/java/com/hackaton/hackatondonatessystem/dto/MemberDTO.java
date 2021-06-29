@@ -1,10 +1,12 @@
 package com.hackaton.hackatondonatessystem.dto;
 
+import com.hackaton.hackatondonatessystem.domain.Deposition;
 import com.hackaton.hackatondonatessystem.domain.Member;
 import com.hackaton.hackatondonatessystem.domain.Permissao;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +27,8 @@ public class MemberDTO {
 
     @NotEmpty(message="Field cpf is required")
     private String cpf;
+
+    private List<Deposition> depositions;
 
     private Permissao permissoes;
 

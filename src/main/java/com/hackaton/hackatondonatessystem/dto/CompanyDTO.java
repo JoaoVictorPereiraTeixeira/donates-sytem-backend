@@ -30,6 +30,8 @@ public class CompanyDTO {
 
     private List<CompanyDonation> donations;
 
+    private List<Deposition> depositions;
+
     private List<SectorDTO> sectors;
 
     private Permissao permissoes;
